@@ -38,8 +38,6 @@ function onUpdate()
 
     clearScreen();
 
-    drawText("*", 17, width, height);
-
     drawAllObjects();
 }
 
@@ -54,8 +52,8 @@ function onInput(key)
 
 function drawAllObjects(){
     // remove dead items
-    drawingObjects = drawingObjects.filter(function(item){
-        return item.alive;
+    drawingObjects = drawingObjects.filter(function(obj){
+        return obj.alive;
     });
 
     // limit the amount of the objects for safety
@@ -74,6 +72,7 @@ function drawAllObjects(){
             obj.alive = false;
             return;
         }
+        
         const gravity = 0.01;
         obj.dy = obj.dy*0.9 + gravity;
         obj.y += obj.dy;
@@ -84,20 +83,24 @@ function drawAllObjects(){
 
         drawObject(obj);
         
-        obj.lifetime += 1;
+        obj.lifetime++;
     });
 }
 
 function addHanabi1(x, y){
-    addDrawingObject("^", 12, -0.7, x, y, 0, -1.6, 
+    addDrawingObject(
+        //text
+        "^",
+        //color, dcolor
+        12, -0.7,
+        //x, y, dx, dy
+        x, y, 0, -1.6,
         //isCompleted:
         function(){
             return this.color <= 1;
         },
         //onComplete:
         function(){
-            //let chars = "******+++";
-            //let text = chars[Math.floor(Math.random()*chars.length)];
             addHanabi2(hanabiText, this.x, this.y);
         }
     );
