@@ -1,3 +1,9 @@
+/**
+ * @file Hanabi (for Last Call BBS)
+ * @version 0.1
+ *
+ */
+
 let frameCount;
 let drawingObjects;
 let hanabiText = "*";
